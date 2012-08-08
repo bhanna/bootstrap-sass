@@ -28,6 +28,8 @@ $yellow:                #ffc40d !default;
 $orange:                #f89406 !default;
 $pink:                  #c3325f !default;
 $purple:                #7a43b6 !default;
+$headerBlue:			rgb(33,121,165) !default;
+
 
 // Scaffolding
 // -------------------------
@@ -36,7 +38,7 @@ $textColor:             $grayDark !default;
 
 // Links
 // -------------------------
-$linkColor:             #08c !default;
+$linkColor:             rgb(212,75,0) !default;
 $linkColorHover:        darken($linkColor, 15%) !default;
 
 // Typography
@@ -140,13 +142,13 @@ $hrBorder:                $grayLighter !default;
 
 // Navbar
 // -------------------------
-$navbarHeight:                    40px !default;
-$navbarBackground:                $grayDarker !default;
+$navbarHeight:                    60px !default;
+$navbarBackground:                $grayLighter !default;
 $navbarBackgroundHighlight:       $grayDark !default;
 
-$navbarText:                      $grayLight !default;
-$navbarLinkColor:                 $grayLight !default;
-$navbarLinkColorHover:            $white !default;
+$navbarText:                      $headerBlue !default;
+$navbarLinkColor:                 $headerBlue !default;
+$navbarLinkColorHover:            darken($headerBlue, 15%) !default;
 $navbarLinkColorActive:           $navbarLinkColorHover !default;
 $navbarLinkBackgroundHover:       transparent !default;
 $navbarLinkBackgroundActive:      $navbarBackground !default;
@@ -182,6 +184,10 @@ $successBorder:           darken(adjust-hue($successBackground, -10), 5%) !defau
 $infoText:                #3a87ad !default;
 $infoBackground:          #d9edf7 !default;
 $infoBorder:              darken(adjust-hue($infoBackground, -10), 7%) !default;
+
+// WELLS	
+//------------------------
+$wellBackground:		rgb(250,249,244) !default;
 
 
 // FIXED GRID

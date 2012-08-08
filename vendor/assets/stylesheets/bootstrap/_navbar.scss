@@ -16,12 +16,12 @@
 
 // Gradient is applied to it's own element because overflow visible is not honored by IE when filter is present
 .navbar-inner {
-  min-height: $navbarHeight;
+  height: $navbarHeight;
   padding-left: 20px;
   padding-right: 20px;
-  @include gradient-vertical($navbarBackgroundHighlight, $navbarBackground);
+  background-color:#fff;
   @include border-radius(4px);
-  @include box-shadow(#{0 1px 3px rgba(0,0,0,.25), inset 0 -1px 0 rgba(0,0,0,.1)});
+  border-bottom:1px solid $grayLighter;
 }
 
 // Set width to auto for default container
@@ -49,12 +49,14 @@
     display: block;
     // Vertically center the text given $navbarHeight
     $elementHeight: 20px;
-    padding: (($navbarHeight - $elementHeight) / 2 - 2) 20px (($navbarHeight - $elementHeight) / 2 + 2);
-    margin-left: -20px; // negative indent to left-align the text down the page
+    margin-left: -80px; // negative indent to left-align the text down the page
     font-size: 20px;
     font-weight: 200;
     line-height: 1;
     color: $navbarBrandColor;
+    text-indent:-9999px;
+    background:url(http://files.couchsurfing.s3.amazonaws.com/rails/cslogo.png) no-repeat center center;
+    width:161px;
   }
   // Plain text in topbar
   .navbar-text {
@@ -311,8 +313,8 @@
 }
 // Dropdown toggle caret
 .navbar .nav li.dropdown .dropdown-toggle .caret, .navbar .nav li.dropdown.open .caret {
-  border-top-color: $white;
-  border-bottom-color: $white;
+  border-top-color: $black;
+  border-bottom-color: $black;
 }
 .navbar .nav li.dropdown.active .caret {
   @include opacity(1);
