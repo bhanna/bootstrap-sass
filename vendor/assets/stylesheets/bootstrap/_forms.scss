@@ -321,9 +321,9 @@ input:focus:required:invalid, textarea:focus:required:invalid, select:focus:requ
   .add-on {
     display: inline-block;
     width: auto;
-    height: $baseLineHeight;
-    min-width: 16px;
-    padding: 4px 5px;
+    height: 20px;
+    min-width: 15px;
+    padding: 6px 5px;
     font-weight: normal;
     line-height: $baseLineHeight;
     text-align: center;
