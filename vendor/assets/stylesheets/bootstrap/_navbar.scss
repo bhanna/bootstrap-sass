@@ -313,8 +313,8 @@
 }
 // Dropdown toggle caret
 .navbar .nav li.dropdown .dropdown-toggle .caret, .navbar .nav li.dropdown.open .caret {
-  border-top-color: $black;
-  border-bottom-color: $black;
+  border-top-color: $grayDark;
+  border-bottom-color: $grayDark;
 }
 .navbar .nav li.dropdown.active .caret {
   @include opacity(1);
