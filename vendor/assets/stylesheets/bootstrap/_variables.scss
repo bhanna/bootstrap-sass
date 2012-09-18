@@ -194,11 +194,11 @@ $wellBorder:			rgb(230,228,215) !default;
 // FIXED GRID
 // --------------------------------------------------
 
-// Default, 940px
+// Default, 1170px
 // -------------------------
 $gridColumns:             12 !default;
-$gridColumnWidth:         60px !default;
-$gridGutterWidth:         20px !default;
+$gridColumnWidth:         70px !default;
+$gridGutterWidth:         30px !default;
 $gridRowWidth:            ($gridColumns * $gridColumnWidth) + ($gridGutterWidth * ($gridColumns - 1)) !default;
 
 // Portrait tablet to default desktop
