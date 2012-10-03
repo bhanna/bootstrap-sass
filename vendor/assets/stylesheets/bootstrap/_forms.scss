@@ -234,6 +234,9 @@ input[type="radio"][disabled], input[type="checkbox"][disabled], input[type="rad
 // Success
 .control-group.success {
   @include formFieldState($successText, $successText, $successBackground);
+}// Info
+.control-group.info {
+  @include formFieldState($infoText, $infoText, $infoBackground);
 }
 
 // HTML5 invalid states
