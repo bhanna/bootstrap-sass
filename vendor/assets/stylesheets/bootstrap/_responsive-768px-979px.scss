@@ -1,8 +1,9 @@
 // PORTRAIT TABLET TO DEFAULT DESKTOP
 // ----------------------------------
 
-@media (min-width: 768px) and (max-width: 979px) {
-
+@media () and () {
+// min-width: 768px  -Reuse these to enable responsive layout
+// max-width: 979px
   // Fixed grid
   @include gridCore($gridColumnWidthTablet, $gridGutterWidthTablet);
 
