@@ -1,8 +1,8 @@
 // LARGE DESKTOP & UP
 // ------------------
 
-@media () {
-// min-width: 1200px Reuse these to enable responsive layout
+@media (min-width: 1200px) {
+
   // Fixed grid
   @include gridCore($gridColumnWidthLarge, $gridGutterWidthLarge);
 

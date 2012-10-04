@@ -1,8 +1,7 @@
 // UP TO LANDSCAPE PHONE
 // ---------------------
 
-@media () {
-  // max-width: 480px Reuse these to enable responsive layout
+@media (max-width: 480px) {
 
   // Smooth out the collapsing/expanding nav
   .nav-collapse {
