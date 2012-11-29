@@ -1,5 +1,5 @@
 /* =============================================================
- * bootstrap-typeahead.js v2.1.0
+ * bootstrap-typeahead.js v2.2.1
  * http://twitter.github.com/bootstrap/javascript.html#typeahead
  * =============================================================
  * Copyright 2012 Twitter, Inc.
@@ -33,10 +33,8 @@
     this.sorter = this.options.sorter || this.sorter
     this.highlighter = this.options.highlighter || this.highlighter
     this.updater = this.options.updater || this.updater
-    this.selected = this.options.selected
     this.$menu = $(this.options.menu).appendTo('body')
     this.source = this.options.source
-    this.itemLabel = this.options.itemLabel || "label"
     this.shown = false
     this.listen()
   }
@@ -46,20 +44,15 @@
     constructor: Typeahead
 
   , select: function () {
-      var val = JSON.parse(this.$menu.find('.active').attr('data-value'))
+      var val = this.$menu.find('.active').attr('data-value')
       this.$element
-        .val(this.updater(val[this.itemLabel]))
+        .val(this.updater(val))
         .change()
-
-      if($.isFunction(this.selected)){
-           this.selected(val)
-      }
-
       return this.hide()
     }
 
-  , updater: function (itemLabel) {
-      return itemLabel
+  , updater: function (item) {
+      return item
     }
 
   , show: function () {
@@ -100,13 +93,6 @@
   , process: function (items) {
       var that = this
 
-      items = $.map( items, function(item) {
-         if(typeof item === "string"){
-             item = new Object({label: item})
-         }
-         return item
-      })
-
       items = $.grep(items, function (item) {
         return that.matcher(item)
       })
@@ -121,7 +107,7 @@
     }
 
   , matcher: function (item) {
-      return ~item[this.itemLabel].toLowerCase().indexOf(this.query.toLowerCase())
+      return ~item.toLowerCase().indexOf(this.query.toLowerCase())
     }
 
   , sorter: function (items) {
@@ -131,8 +117,8 @@
         , item
 
       while (item = items.shift()) {
-        if (!item[this.itemLabel].toLowerCase().indexOf(this.query.toLowerCase())) beginswith.push(item)
-        else if (~item[this.itemLabel].indexOf(this.query)) caseSensitive.push(item)
+        if (!item.toLowerCase().indexOf(this.query.toLowerCase())) beginswith.push(item)
+        else if (~item.indexOf(this.query)) caseSensitive.push(item)
         else caseInsensitive.push(item)
       }
 
@@ -141,7 +127,7 @@
 
   , highlighter: function (item) {
       var query = this.query.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, '\\$&')
-      return item[this.itemLabel].replace(new RegExp('(' + query + ')', 'ig'), function ($1, match) {
+      return item.replace(new RegExp('(' + query + ')', 'ig'), function ($1, match) {
         return '<strong>' + match + '</strong>'
       })
     }
@@ -150,7 +136,7 @@
       var that = this
 
       items = $(items).map(function (i, item) {
-        i = $(that.options.item).attr('data-value', JSON.stringify(item))
+        i = $(that.options.item).attr('data-value', item)
         i.find('a').html(that.highlighter(item))
         return i[0]
       })
@@ -188,13 +174,22 @@
         .on('keypress', $.proxy(this.keypress, this))
         .on('keyup',    $.proxy(this.keyup, this))
 
-      if ($.browser.chrome || $.browser.webkit || $.browser.msie) {
+      if (this.eventSupported('keydown')) {
         this.$element.on('keydown', $.proxy(this.keydown, this))
       }
 
       this.$menu
         .on('click', $.proxy(this.click, this))
         .on('mouseenter', 'li', $.proxy(this.mouseenter, this))
+    }
+
+  , eventSupported: function(eventName) {
+      var isSupported = eventName in this.$element
+      if (!isSupported) {
+        this.$element.setAttribute(eventName, 'return;')
+        isSupported = typeof this.$element[eventName] === 'function'
+      }
+      return isSupported
     }
 
   , move: function (e) {
@@ -235,6 +230,9 @@
       switch(e.keyCode) {
         case 40: // down arrow
         case 38: // up arrow
+        case 16: // shift
+        case 17: // ctrl
+        case 18: // alt
           break
 
         case 9: // tab
@@ -258,11 +256,7 @@
 
   , blur: function (e) {
       var that = this
-      setTimeout(function () {
-        if (!that.$menu.is(':hover')) {
-          that.hide();
-        }
-      }, 150)
+      setTimeout(function () { that.hide() }, 150)
     }
 
   , click: function (e) {
@@ -306,13 +300,11 @@
  /*   TYPEAHEAD DATA-API
   * ================== */
 
-  $(function () {
-    $('body').on('focus.typeahead.data-api', '[data-provide="typeahead"]', function (e) {
-      var $this = $(this)
-      if ($this.data('typeahead')) return
-      e.preventDefault()
-      $this.typeahead($this.data())
-    })
+  $(document).on('focus.typeahead.data-api', '[data-provide="typeahead"]', function (e) {
+    var $this = $(this)
+    if ($this.data('typeahead')) return
+    e.preventDefault()
+    $this.typeahead($this.data())
   })
 
 }(window.jQuery);
